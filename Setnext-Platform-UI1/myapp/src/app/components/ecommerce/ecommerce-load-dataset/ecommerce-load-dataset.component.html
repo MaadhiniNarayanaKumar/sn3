@@ -1,0 +1,48 @@
+
+<div class="all">
+    <div class="sidebar">
+    <!-- Sidebar content goes here -->
+        <div class="side-div ">
+            <!-- upload own dataset here -->
+            <div class="mt-5 pt-5 mx-7 text-blue-700">Start recommending by uploading a dataset :</div>
+            <div class="upload-div"><br><br><input class="upload-side-div text-center" type="file"></div>
+            <!-- choose sample datasets here -->
+            <div class="mt-1 pt-3 mx-7 text-blue-700">You can also select sample datasets here:</div>
+            <!-- <div class="mt-1 mb-3 pt-4 mx-7">
+                <button type="button" class="float-start dataset-load-button">Retail Dataset</button>
+                <button type="button" class="float-end dataset-load-button">Pharma Dataset</button>                
+            </div> -->
+            <div class="mt-1 mb-3 pt-4 mx-7">
+                <button type="button" (click)="selectDataset($event)" class="text-black float-left bg-gray-205 hover:bg-gray-150 border border-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-150  rounded-lg text-sm px-5 py-2.5 text-center ">Retail Dataset</button>
+                <button type="button" (click)="selectDataset($event)" class="text-black float-right bg-gray-205 hover:bg-gray-150 border border-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-150  rounded-lg text-sm px-5 py-2.5 text-center ">Pharma Dataset</button>
+            </div>
+            
+            <!-- <div class="mt-3 mb-3 pt-4 mx-7">
+                <button type="button" class="float-start dataset-load-button">Retail Dataset</button>
+                <button type="button" class="float-end dataset-load-button">Pharma Dataset</button>                
+            </div>
+            <br>
+            <div class="mt-3 mb-3 pt-4 mx-7">
+                <button type="button" class="float-start dataset-load-button">Retail Dataset</button>
+                <button type="button" class="float-end dataset-load-button">Pharma Dataset</button>                
+            </div>
+            <br>
+            <div class="mt-3 mb-3 pt-4 mx-7">
+                <button type="button" class="float-start dataset-load-button">Retail Dataset</button>
+                <button type="button" class="float-end dataset-load-button">Pharma Dataset</button>                
+            </div>
+            <br> -->
+            
+            <button (click)="loadDataset($event)" type="button" class="mt-3 mb-3 mx-12 text-white  bg-gradient-to-br from-white to-blue-700 hover:bg-green-700 border border-gray-400 focus:ring-2 focus:outline-none focus:ring-gray-150 rounded-full text-sm px-20 py-2.5 text-center font-bold"  [disabled]="disabled" dis>Load Dataset</button>
+        </div>
+    </div>
+    <div class="main">
+    <!-- Main content goes here -->
+        <div>
+            <p class="text-blue-700 text-5xl">Try Senext.Ai's <br> AI Powered Product Recommendation <br> in seconds.</p>
+        </div>
+        <br>
+        <p>Access customised AI model for product reccommendation using GEN AI through our Feature.<br>Quickly test using your own dataset file.</p>
+    </div>
+    
+</div>

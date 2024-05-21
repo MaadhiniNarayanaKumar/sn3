@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-9">
+            <div class="history_data" *ngFor=" let item of history_data">
+                <div class="row me-1">
+                    <div class="p-2 bg-dark bg-gradient text-white" style="margin-bottom: 20px;"><b>Phone :
+                        </b>{{phone_number}}
+                        <span style="display: inline-block; width: 170px; text-align: right;"><b>Call Date:
+                            </b>{{item['call_date']}}</span>
+                        <span style="display: inline-block; width: 250px; text-align: right;"><b>Department:
+                            </b>{{item['department_name']}}</span>
+                        <span
+                            style="display: inline-block; width: 200px; text-align: right;"><b>Category:</b>{{item['ai_narration']['Category']}}</span>
+                    </div>
+                </div>
+                <div class="row mt-3 me-1">
+                    <p><b>AI Narration:</b>{{item['ai_narration']['DetailedStudy']}}</p>
+                    <p><b>Summary:</b>{{item['ai_narration']['Summary']}}</p>
+                    <p><b>Caller Sentiment : </b>{{item['ai_narration']['Sentiment']}}</p>
+
+                    <p><b>Recommendation for Receptionist call handling
+                            :</b>{{item['ai_narration']['Recommendation_call_handling']}}</p>
+                    <p><b>Recommendation for Receptionist giving promotion of services
+                            :</b>{{item['ai_narration']['Recommendation_promotion']}}</p>
+                    <p><b>Call transcription: </b>{{item['transcript']}}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col">
+            <div class="history_data" *ngFor=" let item of history_data">
+                <p><b>Is the Call Appointment Related: </b>{{item['ai_narration']['isAppointmentRelated']}}</p>
+                <p><b>Is the Call Order Related:</b>{{item['ai_narration']['isOrderRelated']}}</p>
+                <p><b>Mood of the Caller: </b>{{item['ai_narration']['Mood']}}</p>
+                <p><b>Receptionist rating: </b>{{rating}}</p>
+                <div class="dropdown">
+                    <button data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init class="btn dropdown-toggle"
+                        type="button" id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-info-circle"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                        style="max-height: 300px; max-width: 500px;overflow-y: auto;">
+                        <div class="row ms-1">
+                            <span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                                <p>The receptionist is rated by the following conditions:</p>
+                            </span>
+                            <span style="font-size: smaller;">
+                                <p><i>(** NA: The current call is not subjectible to the provided condition )</i></p>
+                                <div class="row"
+                                    style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                    <p>All the yes are counted from the below criterias and calculated the percentage
+                                        which is given as the receptionist rating</p>
+                                </div>
+                                <div *ngFor="let value of call_handling_keys">
+                                    <p>{{value}}: {{item['ai_narration']['ReceptionRating'][value]}}</p>
+                                </div>
+
+                            </span>
+                        </div>
+                    </ul>
+                </div>
+                <div style=" top: 50%; left: 50%;  text-align: center;">
+                    <span>{{pos_rating}}%</span>
+                </div>
+
+                <!-- <div class="mx-auto" style="width: 200px;">{{pos_rating}}%</div> -->
+                <round-progress class="mx-auto" [current]="pos_rating" [max]="100" [animation]="'easeInOutQuart'"
+                    [background]="'#eaeaea'" [animationDelay]="600" [radius]="50" />
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+</div>

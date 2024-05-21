@@ -1,0 +1,88 @@
+<div class="callgrid">
+  <div class="callgrid-top">
+    <div class="row m-3" style="margin: 10px">
+      <button
+        class="btn btn-light mb-3 float-right"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample"
+      >
+        Filters
+        <span *ngIf="isCollapsed"
+          ><i-bs name="arrow-down-circle-fill"></i-bs></span
+        ><span *ngIf="!isCollapsed"
+          ><i-bs name="arrow-up-circle-fill"></i-bs
+        ></span>
+      </button>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <div class="container">
+        <div class="row" id="filters">
+          <div class="col-md-3">
+            <div class="form-group" style="text-align: left">
+              <label class="ms-2 mb-3" for="fromDate">Select Date</label>
+              <input
+                type="date"
+                [formControl]="fromDate"
+                id="fromDate"
+                name="fromDate"
+                class="form-control"
+              />
+            </div>
+            <button
+              type="button"
+              (click)="getCallsByDate(fromDate)"
+              class="btn btn-outline-primary mt-2 mb-3"
+            >
+              Submit
+            </button>
+          </div>
+
+          <div
+            class="dropdown col-md-4 mt-5 mb-2"
+            style="max-height: 10px"
+            (click)="toggleDropdown($event)"
+          >
+            <button
+              class="btn btn-outline-primary dropdown-toggle"
+              type="button"
+            >
+              Subject
+            </button>
+            <div class="dropdown-menu" [ngClass]="{ show: isDropdownOpen }">
+              <a
+                *ngFor="let subj of subjects"
+                class="dropdown-item"
+                href="javascript:void(0)"
+                (click)="filtersubject(subj)"
+                >{{ subj }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <gui-grid
+        [source]="source"
+        [columns]="columns"
+        [maxHeight]="600"
+        [sorting]="true"
+        [infoPanel]="infoPanel"
+        [virtualScroll]="true"
+        [searching]="searching"
+        [theme]="theme"
+        [verticalGrid]="true"
+        [paging]="paging"
+        [titlePanel]="titlePanel"
+        [footerPanel]="footerPanel"
+        [rowHeight]="65"
+        [rowColoring]="rowColoring"
+        [columnMenu]="columnMenu"
+        [loading]="loading"
+      >
+        >
+      </gui-grid>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="container-fluid">
+<div class="btn-toolbar m-4">
+ 
+  <a class='btn btn-primary me-2' [routerLink]="['details']" [queryParams]="{'id':id}">Details</a>
+  <a class='btn btn-success me-2' [routerLink]="['history']" [queryParams]="{'id':id}">History</a>
+  <a class="btn btn-success me-2"  [routerLink]="['chatui']" [queryParams]="{'id':id}" >Chat with me</a> 
+</div>
+<router-outlet></router-outlet>
+</div>

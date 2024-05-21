@@ -1,0 +1,182 @@
+
+.body, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #141438; 
+  background-image: linear-gradient(to bottom, #1a1a52 , #04060A);
+
+}
+
+.signup-container {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
+  padding: 5px;
+}
+
+#signup-text {
+  font-size: 20px;
+  padding-top: 5px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+label {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+  color: #aaa;
+  pointer-events: none; /* Ensure that the label doesn't intercept clicks */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box; /* Ensures padding and border are included in element's total width */
+  border: 1px solid #ddd;
+  background-color: transparent;
+  border-radius: 5px; /* Rounded corners */
+  outline: none; /* Remove default outline */
+}
+
+input[type="text"]:focus ~ label,
+input[type="email"]:focus ~ label,
+input[type="password"]:focus ~ label,
+input[type="text"]:valid ~ label,
+input[type="email"]:valid ~ label,
+input[type="password"]:valid ~ label {
+  top: -10px;
+  left: 10px;
+  font-size: 12px;
+  color: #007bff;
+}
+
+/* .form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+  top: 5px;
+  left: 10px;
+  font-size: 12px;
+  color: #aaa;
+} */
+
+.form-group input:focus + label,
+.form-group input:not(:focus):valid + label {
+  transform: translateY(-25px);
+  font-size: 12px;
+  color: #007bff;
+}
+
+.form-group input:focus {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+
+}
+
+.form-group input:not(:focus) {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+input:focus + label, input:not(:placeholder-shown) + label {
+  top: -15px;
+  font-size: 12px;
+  color: #4b4b4b; /* Change the color as per your design */
+}
+
+input:not(:placeholder-shown) {
+  padding-top: 20px; /* Adjust the input's padding to make space for the label */
+}
+
+button {
+  width: calc(100% - 20px);
+  padding: 10px;
+  font-size: 16px;
+  background-color: #7782e7;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+}
+
+button:hover {
+  background-color: #5861AD;
+}
+
+.active {
+  top: 5px;
+  left: 10px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+
+.error-message {
+  color: white;
+  display: inline-block;
+  vertical-align: left;
+  margin-left: 0;
+  text-align: left;
+  
+
+
+}
+/* .error-message {
+  color: white;
+  position: absolute;
+  left: 10;
+  top: 90%; /* Adjust as needed */
+  /* transform: translateY(-50%); */
+ 
+
+  .nav {
+    position: sticky;
+    top: 0;
+    /* width: 97.8%; */
+    background-color: #05082E; 
+    background-image: linear-gradient(to right, #05082E , #070A32, #5861AD, #212540);
+    color: #fff;
+    display: flex;
+    padding: 0 16px;
+    align-items: center;
+    height: 56px;
+  }
+
+  #img-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  #nav-menu {
+    display: flex;
+    list-style: none;
+    padding-left: 50px;
+  }
+
+  li {
+    padding-left: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+

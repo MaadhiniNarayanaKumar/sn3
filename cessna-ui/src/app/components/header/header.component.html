@@ -1,0 +1,232 @@
+
+<nav  *ngIf="isAuthenticated" class="navbar navbar-expand-lg navbar-dark navbar-custom">
+
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="#"
+
+      ><img src="/assets/img/setnext_logo.webp" style="max-width: 70px"
+
+    /></a>
+
+    <button
+
+      class="navbar-toggler"
+
+      type="button"
+
+      data-bs-toggle="collapse"
+
+      data-bs-target="#navbarSupportedContent"
+
+      aria-controls="navbarSupportedContent"
+
+      aria-expanded="false"
+
+      aria-label="Toggle navigation"
+
+    >
+
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+
+          <a class="nav-link active" aria-current="page" href="/landing">Home</a>
+
+        </li>
+
+        <!-- <li class="nav-item">
+
+          <a class="nav-link" href="#">Link</a>
+
+        </li>
+
+        <li class="nav-item dropdown">
+
+          <a
+
+            class="nav-link dropdown-toggle"
+
+            href="#"
+
+            id="navbarDropdown"
+
+            role="button"
+
+            data-bs-toggle="dropdown"
+
+            aria-expanded="false"
+
+          >
+
+            Dropdown
+
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <li><a class="dropdown-item" href="#">Action</a></li>
+
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+
+            <li>
+
+              <hr class="dropdown-divider" />
+
+            </li>
+
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+
+          </ul>
+
+        </li>
+
+        <li class="nav-item">
+
+          <a
+
+            class="nav-link disabled"
+
+            href="#"
+
+            tabindex="-1"
+
+            aria-disabled="true"
+
+            >Disabled</a
+
+          >
+
+        </li> -->
+
+        <li class="nav-item">
+
+          <a class="nav-link active" aria-current="page">Role: {{user_role}}</a>
+
+        </li>
+
+      </ul>
+
+      <!-- <form class="d-flex"> -->
+
+        <p class="text-white mt-2 mx-5">Welcome back, {{welcome_user}}</p><p> &emsp;&emsp;&emsp;&emsp;&emsp;</p>
+
+        <div *ngIf="isAuthenticated" class="dropdown" style="margin-right:10%;">
+
+                <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                  <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <ul class="dropdown-menu">
+
+                  <li><a class="dropdown-item" (click)="changePassword()">Change Password</a></li>
+
+                  <li><a class="dropdown-item" (click)="logOut()">LogOut</a></li>
+
+                  <!-- <li><button *ngIf="isAuthenticated" (click)="logOut()" class="btn btn-danger ms-2 dropdown-item" type="button">
+
+                    Change Password
+
+                  </button></li>
+
+                  <li><button *ngIf="isAuthenticated" (click)="logOut()" class="btn btn-secondary ms-2 dropdown-item" type="button">
+
+                    LogOut
+
+                  </button></li> -->
+
+                </ul>
+
+              </div>
+
+       <!-- <button *ngIf="isAuthenticated" (click)="logOut()" class="btn btn-danger ms-2" type="button">
+
+          Change Password
+
+        </button> -->
+
+        <button *ngIf="isAuthenticated" (click)="logOut()" class="btn btn-secondary ms-2" type="button">
+
+          LogOut
+
+        </button>
+
+      <!-- </form> -->
+
+    </div>
+
+  
+
+  </div>
+
+</nav>
+
+
+
+
+
+<div *ngIf="pwd==true" class="modal" style="display: block;" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-center">Forgot Password</h5>
+        <button type="button" class="close" (click)="Onclose()"  data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label for="newpassword">New Password</label>
+              <input
+                id="newpassword"
+                type="password"
+                formControlName="newpassword"
+                placeholder="Enter new password here..."
+                class="form-control"
+              />
+              <div *ngIf="formControls['newpassword'].touched && formControls['newpassword'].errors" class="warning">
+                <div *ngIf="formControls['newpassword'].errors['pattern'] && formControls['newpassword'].dirty">New Password should include at least one uppercase letter, one lowercase letter, one digit, and one special character.</div>
+              </div>
+            </div>
+            <div class="col-sm-12 mt-3">
+              <label for="confirmpassword">Confirm Password</label>
+              <input
+                id="confirmpassword"
+                type="password"
+                formControlName="confirmpassword"
+                placeholder="Enter confirm password here..."
+                class="form-control"
+              />
+              <div *ngIf="formControls['confirmpassword'].touched && formControls['confirmpassword'].errors" class="warning">
+                <div *ngIf="formControls['confirmpassword'].errors['required']">Confirm Password is required.</div>
+                <div *ngIf="formControls['confirmpassword'].errors['passwordMismatch']">Passwords do not match.</div>
+              </div>
+            </div>
+            <div class="col-sm-12 mt-3">
+              <button type="button" class="btn btn-success" (click)="onSubmit()">Update Password</button>
+              <div *ngIf="passwordForm.invalid && passwordForm.dirty" class="warning">
+                Please fix the form errors before submitting.
+              </div>
+              <!-- <div *ngIf="submitted && passwordForm.valid" class="success">
+                Password updated successfully!
+              </div> -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,54 @@
+<div class="btn-toolbar mx-2">
+    <!-- <button class='btn btn-success me-2' type="button" data-bs-toggle="collapse" data-bs-target="#collapsechatwithme"
+        aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-chat-dots"
+            style="height: 16px; width: 16px;"></i>&nbsp;Chat With Me</button>
+
+    <button class="btn btn-primary me-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample" (click)="fetch_history()"><i class="bi bi-clock-history"
+            style="height: 16px; width: 16px;"></i>&nbsp;Fetch History
+    </button> -->
+
+</div>
+
+<div class="container-fluid">
+    <p><b style="font-size: large;">Number of calls found :</b> {{history_data.length}} <b> Phone Number : </b>
+        {{phone_number}}</p>
+
+
+    <section class="py-1">
+        <ul class="list-group list-group-flush">
+            <div class="rounded">
+
+                <li class="card mt-3" *ngFor="let item of history_data.reverse() | slice:0:20"
+                    style="width: fit-content;">
+                    <div *ngIf="item['ai_narration']">
+
+                        <div class="card-header" style="background-color:#2a324c;padding-left: 20px;border-top: 7cap;">
+                            <p style="color: black;"><span class="timeline-icon me-3">
+                                    <i class="bi bi-telephone" style="color:whitesmoke;"></i>
+                                </span>
+                                <span style="color: white;"><b>DATE : </b> {{item['india_datetime']}}</span>
+                            </p>
+                        </div>
+                        <div class="card-body" style="padding-left: 20px;background-color:rgb(250, 249, 249);">
+                            <p style="color:black;">
+                                <b>Call summary: </b>{{item['ai_narration']['DetailedStudy']}}
+                            </p>
+
+                            <p><b>Sentiment : </b> {{item['ai_narration']['Sentiment']}}</p>
+                            <p><span class="me-3"><b>Caller Name: </b> {{item['ai_narration']['Caller_Name']}} </span>
+                                <span class="me-3"><b>Receptionist Name: </b>
+                                    {{item['ai_narration']['ReceptionistName']}} </span><span class="me-3"><b>
+                                        Department
+                                        Name: </b>
+                                    {{item['department_name']}}</span></p>
+                            <button class="btn btn-secondary" (click)="moredetails(item)">More details</button>
+
+                        </div>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+    </section>
+    <!-- Section: Timeline -->

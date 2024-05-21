@@ -1,0 +1,23 @@
+.add-user-button{
+    /* margin-right:10px; */
+    margin-left:70px;
+    /* margin-left:85%; */
+    width:150px;
+}
+.dropdown-role{
+    /* margin-left:1%; */
+    /* margin-right:85%; */
+}
+
+.modal {
+    --bs-modal-width: 60%;
+}
+.modal .modal-header,.modal-footer{
+    background-color: rgb(241, 239, 239);
+}
+.input-form{
+    margin: 1%;
+    border: 1px solid rgb(232, 226, 226);
+    border-radius: 5px;;
+    width:100%;
+}

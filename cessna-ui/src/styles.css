@@ -1,0 +1,71 @@
+ @import "bootstrap/dist/css/bootstrap.css";
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  margin:0px;
+  height:100%;
+  background-color: #f9eded;
+}
+
+.user-detail {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+	padding: 25px;
+	min-width: 1150px;
+	
+}
+
+.user-detail img {
+	height: 160px;
+}
+
+.user-detail div {
+    text-align: left;
+	display: block;
+	margin-top: 25px;
+	font-size: 16px;
+}
+
+.user-detail h1 {
+	font-size: 1.5rem;
+	font-weight: 400;
+
+}
+
+.user-detail h2 {
+	font-size: 1.5rem;
+	font-weight: 300;
+	margin-top: 16px;
+}
+
+.user-detail h3 {
+	font-size: 1.2rem;
+	font-weight: 300;
+	margin-top: 16px;
+}
+.user-detail span{
+    margin-left: 10px;
+}
+.gui-drawer-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: auto;
+    position: absolute;
+    padding-left: 50px;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: 1000;
+    min-width: 1200px;
+    background-color: aqua;
+}
+.gui-drawer-wrapper .gui-drawer-content {
+    background-color: #f8f9fa;
+    height: 100%;
+    position: relative;
+    margin-left: auto;
+    -ms-transform: translateX(100%);
+    transform: translate(100%);
+    transition: all .3s ease-in-out;
+}
+

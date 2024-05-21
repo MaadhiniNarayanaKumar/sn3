@@ -1,0 +1,179 @@
+<div class="callgrid">
+  <div class="callgrid-top">
+    <div class="row" style="margin: 10px">
+      <button
+        class="btn btn-light ms-2 float-right"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample"
+      >
+        Filters
+        <span *ngIf="isCollapsed"
+          ><i-bs name="arrow-down-circle-fill"></i-bs></span
+        ><span *ngIf="!isCollapsed"
+          ><i-bs name="arrow-up-circle-fill"></i-bs
+        ></span>
+      </button>
+    </div>
+
+    <div
+      #collapse="ngbCollapse"
+      class="ms-3 me-3"
+      [(ngbCollapse)]="isCollapsed"
+    >
+      <div class="container">
+        <div class="row" id="filters">
+          <div class="col-md-2">
+            <div class="form-group" style="text-align: left">
+              <label class="ms-2 mb-3" for="fromDate">Select Date</label>
+              <input
+                type="date"
+                [formControl]="fromDate"
+                id="fromDate"
+                name="fromDate"
+                class="form-control"
+              />
+            </div>
+            <button
+              type="button"
+              (click)="getbyDate1()"
+              class="btn btn-outline-primary mt-3"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              (click)="removeDate1()"
+              class="btn btn-outline-primary mt-3 ms-2"
+            >
+              Remove
+            </button>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group" style="text-align: left">
+              <label class="ms-2 mb-3" for="fromDate">Select Time</label>
+              <div class="ngx-timepicker-field-example">
+                <!-- <ngx-timepicker-field [format]="12" [defaultTime]="'11:11 AM'"
+                                    [formControl]="selectedTime"></ngx-timepicker-field> -->
+                <ngx-timepicker-field
+                  [controlOnly]="true"
+                  [formControl]="selectedTime"
+                ></ngx-timepicker-field>
+
+                <button
+                  type="button"
+                  (click)="getbyTime1()"
+                  class="btn btn-outline-primary mt-4"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  (click)="removeTime1()"
+                  class="btn btn-outline-primary mt-4 ms-2"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div ngbDropdown class="col-md-2">
+            <label class="ms-2 mb-3" for="fromDate">Select Department</label>
+            <select
+              style="width: 150px"
+              [formControl]="selectedDepartment"
+              (change)="getBydept($event)"
+            >
+              <option disabled selected value="">Select an option</option>
+              <option value="all">All departments</option>
+              <option
+                *ngFor="let dept_name of departments"
+                [ngValue]="dept_name"
+              >
+                {{ dept_name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="ms-2 mb-3" for="fromDate">Select Pet type</label>
+            <div>
+              <select
+                style="width: 150px"
+                [formControl]="selectedPet"
+                (change)="getBypet($event)"
+              >
+                <option value="all">All Pets</option>
+                <option *ngFor="let pet_name of pets" [ngValue]="pet_name">
+                  {{ pet_name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="col-md-2"
+            *ngIf="user_data.principle['functional_role'] == 'Doctor'"
+          >
+            <div class="row">
+              <button
+                type="button"
+                (click)="whole_appointments()"
+                class="btn btn-secondary text-white"
+              >
+                Whole appointments
+              </button>
+            </div>
+            <div class="row mt-1">
+              <button
+                type="button"
+                (click)="get_appointment(phoneno)"
+                class="btn btn-secondary text-white"
+              >
+                My appointments
+              </button>
+            </div>
+          </div>
+          <div
+            ngbDropdown
+            class="col-md-2"
+            *ngIf="user_data.principle['functional_role'] == 'receptionist'"
+          >
+            <label class="ms-2 mb-3" for="fromDate">Appointment Types</label>
+            <select
+              style="width: 150px"
+              [formControl]="selectedAppointment"
+              (change)="appointmentType($event)"
+            >
+              <option disabled selected value="">Select an option</option>
+              <option value="Doctor">For doctors</option>
+              <option value="patient">For patients</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="px-3 mt-3">
+    <gui-grid
+      [source]="source"
+      [columns]="columns"
+      [maxHeight]="600"
+      [sorting]="true"
+      [infoPanel]="infoPanel"
+      [virtualScroll]="true"
+      [searching]="searching"
+      [theme]="theme"
+      [verticalGrid]="true"
+      [paging]="paging"
+      [titlePanel]="titlePanel"
+      [footerPanel]="footerPanel"
+      [rowHeight]="65"
+      [rowColoring]="rowColoring"
+      [columnMenu]="columnMenu"
+      [rowDetail]="rowDetail"
+      [loading]="loading"
+    >
+      >
+    </gui-grid>
+  </div>
+</div>

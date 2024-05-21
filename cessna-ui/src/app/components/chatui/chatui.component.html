@@ -1,0 +1,40 @@
+<div style="margin-left: 200px;">
+    <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="chath" style="max-height: 430px;">
+        <div class="message container-fluid p-0">
+            <div *ngFor="let msg of Chatmessage" class="msg ">
+                <br>
+                <div *ngIf="msg.message_type=='txt_msg'">
+                    <div *ngIf="msg.sender=='Ai'">
+                        <div class="logo">
+                            <img class="ai_logo" src="assets\img\animal.webp" />
+                        </div>&nbsp;
+                        <div class="message-ai ">
+                            <markdown markdown [data]="msg.txt"></markdown>
+                        </div>
+                        <!-- <div class="space"></div> -->
+                    </div>
+                    <div *ngIf="msg.sender=='user'">
+                        <div class="logo">
+                            <img class="user_logo" src="assets\img\cessna_logo1.jpeg" />
+                        </div>&nbsp;
+                        <div class="message-user">
+                            {{msg.txt}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fixed-bottom container-fluid pb-5">
+
+            <div class="send-container" style="min-height: 50px;margin-left: 200px;">
+                <div class="send btn-toolbar pt-0">
+                    <textarea class="chatbox mt-2" style="min-height: 30px; max-height:30px;" rows="1" #messageInput
+                        placeholder="Send a message" (input)="adjustTextAreaHeight(messageInput)"
+                        (keydown.enter)="sendMessage()"></textarea>
+                    <button class="btn btn-dark mt-1" style="max-height: 40px;" type="button" (click)="sendMessage()"><i
+                            class="bi bi-send pt-4"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

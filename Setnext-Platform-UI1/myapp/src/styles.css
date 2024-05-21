@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.bg-color {
+    background-image:linear-gradient(to bottom, #1a1a52 , #04060A); 
+    
+}
+
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#header1 {
+    color: white;
+    margin: 0;
+    padding-top: 100px;
+    padding-left: 34%;
+    font-size: 50px;
+}
+
+#header2 {
+    color: white;
+    margin: 0;
+    padding-left: 32%;
+    font-size: 50px;
+}
+
+#para1 {
+    color: white;
+    max-width: 800px;
+    text-align: center;
+    padding-left: 25%;
+    font-size: 25px;
+    padding-bottom: 0;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.nav {
+    position: sticky;
+    top: 0;
+    /* width: 97.8%; */
+    background-color: #05082E; 
+    background-image: linear-gradient(to right, #05082E , #070A32, #5861AD, #212540);
+    color: #fff;
+    display: flex;
+    padding: 0 16px;
+    align-items: center;
+    height: 56px;
+  }
+
+  #img-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  #nav-menu {
+    display: flex;
+    list-style: none;
+    padding-left: 50px;
+  }
+
+  li {
+    padding-left: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+/* .bg-black-500 {
+    margin-left: 1000px;
+    background-color: #05082E; 
+    background-image: linear-gradient(to right, #05082E , #070A32, #5861AD, #212540);
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+.bg-black-500:hover {
+    background-color: #5861AD;
+    background-image: linear-gradient(to left, #05082E , #070A32, #5861AD, #212540);
+} */

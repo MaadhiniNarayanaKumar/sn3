@@ -1,0 +1,155 @@
+<div class="callgrid">
+  <div class="callgrid-top">
+    <div class="row" style="margin: 10px">
+      <button
+        class="btn btn-light ms-2 float-right"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample"
+      >
+        Filters
+        <span *ngIf="isCollapsed"
+          ><i-bs name="arrow-down-circle-fill"></i-bs></span
+        ><span *ngIf="!isCollapsed"
+          ><i-bs name="arrow-up-circle-fill"></i-bs
+        ></span>
+      </button>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <div class="container">
+        <div class="row" id="filters">
+          <div class="col-md-3 -3 mt-0">
+            <label>FromDate</label>
+            <input type="date" [(ngModel)]="fromDate" />
+            <label>ToDate</label>
+            <input type="date" [(ngModel)]="todate" />
+            <button (click)="getdates()">Submit</button>
+          </div>
+          <div
+            class="dropdown col-3 md-4 mb-3"
+            style="max-height: 40px; padding-top: 30px"
+            (click)="toggleDropdown($event)"
+          >
+            <button
+              class="btn btn-outline-primary dropdown-toggle"
+              type="button"
+            >
+              Subject
+            </button>
+            <div class="dropdown-menu" [ngClass]="{ show: isDropdownOpen }">
+              <a
+                *ngFor="let subj of subjects"
+                class="dropdown-item"
+                href="javascript:void(0)"
+                (click)="filtersubject(subj)"
+                >{{ subj }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid pb-5 mt-3">
+      <div *ngFor="let item of source.reverse()" class="accordion-item">
+        <div class="accordion" id="accordionExample">
+          <h2
+            class="accordion-header"
+            [attr.id]="'heading' + item['current_time']"
+          >
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="
+                '#collapseOne' + formattime(item['current_time'])
+              "
+              [attr.aria-controls]="
+                'collapseOne' + formattime(item['current_time'])
+              "
+              style="background-color: #b1b5c7"
+            >
+              <div
+                class="card-header"
+                style="
+                  padding-left: 20px;
+                  border-top: 7cap;
+                  background-color: #b1b5c7;
+                "
+              >
+                <p style="color: black">
+                  <span class="timeline-icon me-3"> </span>
+                  <i
+                    class="bi bi-clock-history me-3"
+                    style="color: whitesmoke"
+                  ></i>
+                  <span style="color: black"
+                    ><b>DATE : </b> {{ formatdate(item["current_time"]) }}</span
+                  >
+                  <span style="padding-left: 20px"><b> - </b></span>
+                  <span style="padding-left: 20px"
+                    ><b>{{ item["subject"] }}</b></span
+                  >
+                </p>
+              </div>
+            </button>
+          </h2>
+        </div>
+        <div
+          [attr.id]="'collapseOne' + formattime(item['current_time'])"
+          class="accordion-collapse collapse"
+          [attr.aria-labelledby]="'heading' + formattime(item['current_time'])"
+          data-bs-parent="#accordionExample"
+        >
+          <div
+            class="accordion-body ps-3 pe-3"
+            style="background-color: rgb(255, 251, 251)"
+          >
+            <div style="display: flex; align-items: center">
+              <p style="color: black; margin-right: auto" class="mt-3">
+                <b>Role: </b>{{ item["functional_role"] }}
+              </p>
+              <div
+                style="margin-left: auto; display: flex; align-items: center"
+                class="mt-3"
+              >
+                <b style="margin-right: 5px">Audio :</b>
+                <audio controls>
+                  <source [src]="item['raw_media']" type="audio/mpeg" />
+                </audio>
+              </div>
+            </div>
+            <p>
+              <span class="me-3"
+                ><b> Actor_ID: </b> {{ item["actor_id"] }} </span
+              ><span class="me-3"
+                ><b> Patient ID </b> {{ item["patient_id"] }}</span
+              >
+            </p>
+            <div
+              class="mt-3"
+              *ngFor="let item of item['ai_narration'] | keyvalue"
+            >
+              <p>
+                <b>{{ item.key }}</b> : {{ item.value }}
+              </p>
+            </div>
+            <p><b>Form Data : </b></p>
+            <div class="card p-3" style="background-color: rgb(234, 234, 230)">
+              <div *ngFor="let item of item['formdata'] | keyvalue" class="m-2">
+                <b>{{ item.key }}</b> : {{ item.value }}
+              </div>
+            </div>
+
+            <div *ngFor="let item of item['supporting_documents'] | keyvalue">
+              <p>
+                <b>{{ item.key }}</b> :<a [href]="item.value">{{
+                  item.value
+                }}</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

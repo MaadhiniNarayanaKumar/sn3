@@ -1,0 +1,42 @@
+<div class="d-flex flex-column justify-content-center align-items-center" *ngIf="loading" style="min-height: 100vh; background-color: indigo;">
+    <div class="spinner-border" role="status" style="width: 100px; height: 100px; color: white;"></div>
+    <span class="sr-only" style="color: grey;">Loading...</span>
+  </div>
+<div class="main">  
+<div class="row px-5 py-5" *ngIf="!loading"> 
+        <div class="col-2 " style="margin-left:4%;margin-right:4%;">
+            <h3 style="color: azure;"><b>Incoming Calls</b></h3>
+            <ngx-gauge style="color: aqua;" [value]="source.length" [type]="gaugeType" [cap]="'round'" [thick]="9" [label]="'/'+(total)" [append]="gaugeAppendText" [max]="total"></ngx-gauge>
+
+
+       
+        </div>
+        <div class="col-2 " style="margin-left:4%;margin-right:4%;" >
+            <h3 style="color: azure;"><b>Outgoing Calls</b></h3>
+              
+            <ngx-gauge style="color: aqua;" [value]="source_outgoing.length" [type]="gaugeType" [cap]="'round'" [thick]="9"  [label]="'/'+(total)" [append]="gaugeAppendText" [max]="total"></ngx-gauge>
+            
+        </div>
+        <div class="col-2" style="margin-left:4%;margin-right:4%;" >
+            <h3 style="color: azure;"><b>Attended Calls</b></h3>
+            <ngx-gauge style="color: aqua;" [value]="source_attended.length" [type]="gaugeType" [cap]="'round'" [thick]="9" [label]="'/'+(total)" [append]="gaugeAppendText" [max]="total"></ngx-gauge>
+
+
+
+            
+        </div>
+      
+        <div class="col-2 " style="margin-left:4%;margin-right:4%;">
+            <h3 style="color: azure;"><b>Missed Calls</b></h3>
+              
+            <ngx-gauge style="color: aqua;" [value]="source_missed.length" [type]="gaugeType" [cap]="'round'" [thick]="9"  [label]="'/'+(total)" [append]="gaugeAppendText" [max]="total"></ngx-gauge>
+            
+        </div>
+    </div>
+    <div class="row"  *ngIf="!loading">
+        <div class="chart-container mt-3">
+            <canvas style="max-height: 300px;color: azure;" id="MyChart">{{chart}}</canvas>
+        </div> 
+    </div> 
+</div>
+

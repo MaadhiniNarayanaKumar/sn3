@@ -1,0 +1,41 @@
+.accordion {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+  }
+  
+  .accordion-item {
+    margin-bottom: 10px;
+  }
+
+  /* Style for the container */
+.col-md-3 {
+  margin: 20px;
+}
+
+/* Style for the input elements inside .col-md-3 */
+.col-md-3 input[type="date"] {
+  padding: 8px;
+  margin: 5px 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style for the button inside .col-md-3 */
+.col-md-3 button {
+  background-color:#0D6EFC;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for the button inside .col-md-3 */
+.col-md-3 button:hover {
+  background-color: #0D6EFC;
+}
+
+  

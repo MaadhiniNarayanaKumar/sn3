@@ -1,0 +1,19 @@
+.main{
+    background-image: linear-gradient(indigo, black);
+    height:100vh;
+    /* padding:3%; */
+}
+.img-landing-card{
+    margin-top:10px;
+    background-color: white;
+    border-radius: 3px;
+    padding:3%;
+    height:180px;
+    width:100%;
+}
+.template-card{
+    margin-top:20px;
+    margin-bottom:20px;
+    /* margin-left:22px;
+    margin-right:22px; */
+}

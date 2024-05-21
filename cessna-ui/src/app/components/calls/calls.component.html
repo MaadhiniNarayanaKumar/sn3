@@ -1,0 +1,94 @@
+<div class="callgrid">
+  <div class="callgrid-top">
+    <div class="row m-3">
+      <button class="btn btn-light mb-3 float-right" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        Filters
+        <span *ngIf="isCollapsed"><i-bs name="arrow-down-circle-fill"></i-bs></span>
+        <span *ngIf="!isCollapsed"><i-bs name="arrow-up-circle-fill"></i-bs></span>
+      </button>
+    </div>
+    <div #collapse="ngbCollapse" class="ms-3 me-3" [(ngbCollapse)]="isCollapsed">
+      <div class="container">
+        <div class="row" id="filters">
+          <div class="col-md-2">
+            <div class="form-group" style="text-align: left">
+              <label class="ms-2 mt-0" for="fromDate">Select Date</label>
+              <input type="date" [formControl]="fromDate" id="fromDate" name="fromDate" class="form-control mt-0" />
+            </div>
+            <button type="button" (click)="getCallsByDate()" class="btn btn-outline-primary mt-1"
+              style="margin-left: 80px;background-color: #2a324c;color: white;">
+              Submit
+            </button>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group" style="text-align: left">
+              <label class="ms-2 mt-0" for="phone_number">Phone Number</label>
+              <input type="text" [formControl]="phone_number" id="phone_number" name="phone_number"
+                class="form-control mt-0" placeholder="Search History" />
+            </div>
+            <button type="button" (click)="getphonehistory()" class="btn btn-outline-primary me-0 mt-1"
+              style="margin-left: 80px;background-color: #2a324c;color: white;">
+              Submit
+            </button>
+          </div>
+          <div class="col-md-2 mt-4">
+            <div ngbDropdown class="ngbDropdown">
+              <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle
+                style="margin-left: 10px;background-color: #2a324c;color: white;">
+                Sentiment
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <a class="dropdown-item" *ngFor="let sentiment of sentiments"
+                  (click)="filterSentiments(sentiment)">{{ sentiment }}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 mt-4">
+            <div ngbDropdown class="ngbDropdown">
+              <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle
+                style="margin-left: 10px;background-color: #2a324c;color: white;">
+                Ratings
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <a class="dropdown-item"  *ngFor="let rating of ratings" (click)="filterRating(rating)">{{
+                  rating }}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 mt-4">
+            <div ngbDropdown class="ngbDropdown">
+              <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle
+                style="margin-left: 5px;background-color: #2a324c;color: white;">
+                Department
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <a class="dropdown-item" *ngFor="let dept_name of departments"
+                  (click)="filterdepartment(dept_name)">{{ dept_name }}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2  mt-4">
+            <div ngbDropdown class="d-inline-block">
+              <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle
+                style="margin-right: 5px;background-color: #2a324c;color: white;">
+                Time
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <a class="dropdown-item"  *ngFor="let t of time" (click)="dropClicked(t)">{{ t }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-3 mt-3">
+      <gui-grid [source]="source" [columns]="columns" [maxHeight]="600" [sorting]="true" [infoPanel]="infoPanel"
+        [virtualScroll]="true" [searching]="searching" [theme]="theme" [verticalGrid]="true" [paging]="paging"
+        [titlePanel]="titlePanel" [footerPanel]="footerPanel" [rowHeight]="65" [rowColoring]="rowColoring"
+        [columnMenu]="columnMenu" [rowDetail]="rowDetail" [loading]="loading">
+        >
+      </gui-grid>
+    </div>
+  </div>
+</div>

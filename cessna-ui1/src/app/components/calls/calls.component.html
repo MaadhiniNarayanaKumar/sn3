@@ -1,0 +1,173 @@
+<div class="callgrid">
+  <div class="callgrid-top">
+    <div class="row" style="margin: 10px">
+      <button
+        class="btn btn-light ms-2 float-right"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample"
+      >
+        Filters
+        <span *ngIf="isCollapsed"
+          ><i-bs name="arrow-down-circle-fill"></i-bs></span
+        ><span *ngIf="!isCollapsed"
+          ><i-bs name="arrow-up-circle-fill"></i-bs
+        ></span>
+      </button>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <div class="container">
+      <div class="row"  id="filters">
+        <div class="col-md-3">
+          <div class="form-group" style="text-align: left">
+            <label class="ms-2 mb-3" for="fromDate">Select Date</label>
+            <input
+              type="date"
+              [formControl]="fromDate"
+              id="fromDate"
+              name="fromDate"
+              class="form-control"
+            />
+          </div>
+          <button
+          type="button"
+          (click)="getCallsByDate()"
+          class="btn btn-outline-primary mt-3"
+        >
+          Submit
+        </button>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group" style="text-align: left">
+            <label class="ms-2 mb-3" for="phone_number">Search Phone Number</label>
+            <input
+              type="text"
+              [formControl]="phone_number"
+              id="phone_number"
+              name="phone_number"
+              class="form-control"
+              placeholder="Search History"
+            />
+          </div>
+            <button
+              type="button"
+              (click)="getphonehistory()"
+              class="btn btn-outline-primary mt-3 me-0"
+              style="margin-right: 100px;"
+              
+            >
+              Submit
+            </button>
+          
+     
+        </div>
+        <div class="col-md-3">
+          <div class="me-5 mb-3">
+          <label class="mood label ms-0" >Filter by sentiment</label>
+        </div>
+        <div ngbDropdown class="ngbDropdown">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+           Filter by mood
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button (click)="getCallsByMood('Angry')" ngbDropdownItem>
+              Angry
+            </button>
+            <button (click)="getCallsByMood('Anxious')" ngbDropdownItem>
+              Anxious
+            </button>
+            <button (click)="getCallsByMood('Happy')" ngbDropdownItem>
+              Happy
+            </button>
+            <button (click)="getCallsByMood('Neutral')" ngbDropdownItem>
+              Neutral
+            </button>
+            <button (click)="getCallsByMood('Sad')" ngbDropdownItem>
+              Sad
+            </button>
+            <button (click)="getCallsByMood('All')" ngbDropdownItem>
+              All
+            </button>
+          </div>
+        </div>
+        </div>
+       
+        </div>
+        <!-- <div class="col-3">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="toDate">To: </label>
+            <div class="col-sm-10">
+              <input
+                class="form-control"
+                [formControl]="toDate"
+                type="datetime-local"
+                id="toDate"
+                name="toDate"
+              />
+            </div>
+          </div>
+        </div> -->
+   
+        <div class="row">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+              >
+                Quick Filters
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button (click)="dropClicked('15')" ngbDropdownItem>
+                  Last 15 Minutes
+                </button>
+                <button (click)="dropClicked('30')" ngbDropdownItem>
+                  Last 30 Minutes
+                </button>
+                <button (click)="dropClicked('1')" ngbDropdownItem>
+                  Last 1 Hour
+                </button>
+                <button (click)="dropClicked('2')" ngbDropdownItem>
+                  Last 2 Hours
+                </button>
+                <button (click)="dropClicked('4')" ngbDropdownItem>
+                  Last 4 Hours
+                </button>
+                <button (click)="dropClicked('today')" ngbDropdownItem>Today</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <gui-grid
+      [source]="source"
+      [columns]="columns"
+      [maxHeight]="600"
+      [sorting]="true"
+      [infoPanel]="infoPanel"
+      [virtualScroll]="true"
+      [searching]="searching"
+      [theme]="theme"
+      [verticalGrid]="true"
+      [paging]="paging"
+      [titlePanel]="titlePanel"
+      [footerPanel]="footerPanel"
+      [rowHeight]="65"
+      [rowColoring]="rowColoring"
+      [columnMenu]="columnMenu"
+      [rowDetail]="rowDetail"
+      [loading]="loading"
+    >
+      >
+    </gui-grid>
+  </div>
+</div>

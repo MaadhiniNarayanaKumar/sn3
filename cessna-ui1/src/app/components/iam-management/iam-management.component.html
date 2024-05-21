@@ -1,0 +1,926 @@
+<!-- <p>iam-mSanagement works!</p> -->
+
+
+<div class="mt-5 mx-5" style="height:100vh;">
+    <div>
+        <div class="text-center text-large">List of Users</div>
+        <!-- <div class="dropdown col">
+            <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div> -->
+        
+        <div class="row">
+            <div class="dropdown col-sm-10">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Type of User
+                </button>
+                <ul class="dropdown-menu">
+                  <!-- <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                  <li><a class="dropdown-item" (click)="getUsers('Patient')">Patient</a></li>
+                  <li><a class="dropdown-item" (click)="getUsers('Doctor')">Doctor</a></li>
+                  <li><a class="dropdown-item" (click)="getUsers('Nurse')">Nurse</a></li>
+                  <li><a class="dropdown-item" (click)="getUsers('Technician')">Technician</a></li>
+                  <li><a class="dropdown-item" (click)="getUsers('Pharmacist')">Pharmacist</a></li>
+                  <li><a class="dropdown-item" (click)="getUsers('Doctor HOD')">Doctor HOD</a></li>
+                  <li><a class="dropdown-item" (click)="getUsers('Super User')">Super User</a></li>
+                </ul>
+              </div>
+            
+            <!-- <div class="dropdown  dropdown-role col">
+                <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Type of Users
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Patient</a>
+                  <a class="dropdown-item" href="#">Doctor</a>
+                  <a class="dropdown-item" href="#">Nurse</a>
+                  <a class="dropdown-item" href="#">Technician</a>
+                  <a class="dropdown-item" href="#">Pharmacist</a>
+                  <a class="dropdown-item" href="#">Doctor HOD</a>
+                  <a class="dropdown-item" href="#">Super User</a>
+                </div>
+            </div>  -->
+            <!-- <button class="btn btn-success col" type="button" (click)="addUserButton()">Add Users <i class="bi bi-plus-circle"></i></button> -->
+            <button class="btn btn-success add-user-button col-sm-2" type="button" (click)="addUserButton()">Add Users <i class="bi bi-plus-circle"></i></button>
+        </div>
+        
+    </div>
+    <br>
+    <gui-grid [source]="users" [cellEditing]="celledit">
+
+        <gui-grid-column header="#" width="60">
+            <ng-template let-index="index">
+                {{index+1}}
+            </ng-template>
+        </gui-grid-column>
+    
+        <gui-grid-column header="FirstName" field="firstname">
+            <ng-template let-value="value">
+                {{value}}
+            </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="LastName" field="lastname">
+            <ng-template let-value="value">
+                {{value}}
+            </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Email" field="email">
+            <ng-template let-value="value">
+                {{value}}
+            </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Address" field="address">
+            <ng-template let-value="value">
+                {{value}}
+            </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="State" field="state">
+            <ng-template let-value="value">
+                {{value}}
+            </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="City" field="city">
+            <ng-template let-value="value">
+                {{value}}
+            </ng-template>
+        </gui-grid-column>
+    
+        <gui-grid-column header="Role" field="functional_role" width="150">
+            <ng-template let-value="value">
+                <i>{{value}}</i>
+            </ng-template>
+        </gui-grid-column>
+        <!-- <gui-grid-column header="phoneno" field="phoneno" width="150">
+            <ng-template let-value="value">
+                <i>{{value}}</i>
+            </ng-template>
+        </gui-grid-column> -->
+    
+        <gui-grid-column header="Actions" width="180" field="isActive">
+            <ng-template let-value="value" let-item="item">
+                <button class="btn btn-light" (click)="showDetails(item)">{{editbutton}}</button>
+                <button  class="btn btn-danger"(click)="remove(item)">{{value}}</button>
+            </ng-template>
+        </gui-grid-column>
+    
+    </gui-grid>
+    
+</div>
+
+<div *ngIf="newUserModal" class="modal  " style="display: block;"   tabindex="-1"  role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title w-100 text-center">
+              Add New User
+            </h5>
+            <button type="button" class="btn-close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+          <!--  <p class="d-inline-flex gap-1">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  User Details 
+                </button>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <form  [formGroup]="addNewUsersForm" (ngSubmit)="onCreateSubmit()">
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                                <label for="firstname">FirstName</label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-6">
+                                <input
+                                    id="firstname"
+                                    type="text"
+                                    formControlName="firstname"
+                                    required
+                                    placeholder="Enter FirstName here..."
+                                    class="input-form"
+                                />
+                                <div
+                                    *ngIf="(addNewUsersForm.controls['firstname'].invalid &&
+                                        addNewUsersForm.controls['firstname'].touched) ||
+                                        fname == true
+                                    "
+                                    class="alert alert-danger"
+                                >
+                                    <div
+                                    *ngIf="addNewUsersForm.controls['firstname'].errors"
+                                    >
+                                    FirstName is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                                <label for="lastname">LastName</label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-6">
+                                <input
+                                    id="lastname"
+                                    type="text"
+                                    formControlName="lastname"
+                                    required
+                                    placeholder="Enter LastName here..."
+                                    class="input-form"
+                                />
+                                <div
+                                    *ngIf="(addNewUsersForm.controls['lastname'].invalid &&
+                                        addNewUsersForm.controls['lastname'].touched) ||
+                                    lname == true
+                                    "
+                                    class="alert alert-danger"
+                                >
+                                    <div
+                                    *ngIf="addNewUsersForm.controls['lastname'].errors"
+                                    >
+                                    LastName is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div class="row form-row-css">
+                            <div class="col-sm-3">
+                            <label for="phoneno">Phone Number</label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-6">
+                            <input
+                                id="phoneno"
+                                type="tel"
+                                formControlName="phoneno"
+                                required
+                                placeholder="Enter Phoneno. here..."
+                                class="input-form"
+                            />
+                            <div
+                                *ngIf="
+                                (addNewUsersForm.controls['phoneno'].invalid &&
+                                    addNewUsersForm.controls['phoneno'].touched) ||
+                                phno == true
+                                "
+                                class="alert alert-danger"
+                            >
+                                <div
+                                *ngIf="addNewUsersForm.controls['phoneno'].errors"
+                                >
+                                Phone Number is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                            <label for="email">Email </label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                            <input
+                                id="email"
+                                type="email"
+                                formControlName="email"
+                                required
+                                placeholder="Enter Email here..."
+                                class="input-form"
+                            />
+                            <div
+                                *ngIf="
+                                (addNewUsersForm.controls['email'].invalid &&
+                                    addNewUsersForm.controls['email'].touched) ||
+                                    email_id == true
+                                "
+                                class="alert alert-danger"
+                            >
+                                <div
+                                *ngIf="addNewUsersForm.controls['email'].errors"
+                                >
+                                Email is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                            <label for="password">Password</label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-6">
+                            <input
+                                id="password"
+                                type="password"
+                                formControlName="password"
+                                required
+                                placeholder="Enter Password here..."
+                                class="input-form"
+                            />
+                            <div
+                                *ngIf="
+                                (addNewUsersForm.controls['password'].invalid &&
+                                    addNewUsersForm.controls['password'].touched) ||
+                                pwd == true
+                                "
+                                class="alert alert-danger"
+                            >
+                                <div
+                                *ngIf="addNewUsersForm.controls['password'].errors"
+                                >
+                                Password is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                              <label for="role">Functional Role</label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-5">
+                              <select
+                                class="custom-select input-form"
+                                (change)="changeTypeOfTicket($event)"
+                                formControlName="role"
+                              >
+                                <option value="" selected disabled>Choose your Functional Role</option>
+                                <option *ngFor="let t of UserType" [ngValue]="t">
+                                  {{ t }}
+                                </option>
+                              </select>
+                              <div
+                                *ngIf="
+                                  (addNewUsersForm.controls['role'].value == '' &&
+                                  addNewUsersForm.controls['role'].touched) ||
+                                  rle == true
+                                "
+                                class="alert alert-danger"
+                              >
+                                <div
+                                  *ngIf="
+                                  addNewUsersForm.controls['role'].value == '' || addNewUsersForm.controls['role'].value == null
+                                  "
+                                >
+                                Functional Role is required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row form-row-css">
+                            <div class="col-sm-3">
+                            <label for="branch">Hospital Branch </label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                            <input
+                                id="branch"
+                                type="text"
+                                formControlName="branch"
+                                required
+                                placeholder="Enter Branch here..."
+                                class="input-form"
+                            />
+                            <div
+                                *ngIf="
+                                (addNewUsersForm.controls['branch'].invalid &&
+                                    addNewUsersForm.controls['branch'].touched) ||
+                                    brach == true
+                                "
+                                class="alert alert-danger"
+                            >
+                                <div
+                                *ngIf="addNewUsersForm.controls['branch'].errors"
+                                >
+                                Branch is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <p
+                    *ngIf="addNewUsersForm.status == 'INVALID' && all_false"
+                    class="w-100 text-center"
+                    style="color: red"
+                >
+                    <br />**Please fill all the required fields.**
+                </p>
+                    </form>
+                </div>
+              </div>
+              <br>
+              <p class="d-inline-flex gap-1">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" ata-bs-target=".multi-collapse" aria-expanded="false" aria-controls="collapseExample1 collapseExample">
+                    User Address Details
+                </button>
+              </p>
+              <div class="collapse" id="collapseExample1">
+                <div class="card card-body">
+                    <form  [formGroup]="addNewUsersForm" (ngSubmit)="onCreateSubmit()">
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                            <label for="state">State </label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                            <input
+                                id="state"
+                                type="text"
+                                formControlName="state"
+                                required
+                                placeholder="Enter State here..."
+                                class="input-form"
+                            />
+                            <div
+                                *ngIf="
+                                (addNewUsersForm.controls['state'].invalid &&
+                                    addNewUsersForm.controls['state'].touched) ||
+                                    ste == true
+                                "
+                                class="alert alert-danger"
+                            >
+                                <div
+                                *ngIf="addNewUsersForm.controls['state'].errors"
+                                >
+                                State is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                            <label for="city">City </label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                            <input
+                                id="city"
+                                type="text"
+                                formControlName="city"
+                                required
+                                placeholder="Enter City here..."
+                                class="input-form"
+                            />
+                            <div
+                                *ngIf="
+                                (addNewUsersForm.controls['city'].invalid &&
+                                    addNewUsersForm.controls['city'].touched) ||
+                                     cty == true
+                                "
+                                class="alert alert-danger"
+                            >
+                                <div
+                                *ngIf="addNewUsersForm.controls['city'].errors"
+                                >
+                                City is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                            <label for="pincode">Pin </label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                            <input
+                                id="pincode"
+                                type="text"
+                                formControlName="pincode"
+                                required
+                                placeholder="Enter Pin Code here..."
+                                class="input-form"
+                            />
+                            <div
+                                *ngIf="
+                                (addNewUsersForm.controls['pincode'].invalid &&
+                                    addNewUsersForm.controls['pincode'].touched) ||
+                                    pin == true
+                                "
+                                class="alert alert-danger"
+                            >
+                                <div
+                                *ngIf="addNewUsersForm.controls['pincode'].errors"
+                                >
+                                Pin Code is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-row-css">
+                            <div class="col-sm-3">
+                                <label for="address">Address</label>
+                            </div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-8">
+                                <textarea
+                              rows="5"
+                              style="height: 90%"
+                              id="address"
+                              type="text"
+                              formControlName="address"
+                              required
+                              placeholder="Enter your current residential address here..."
+                              class="input-form"
+                            ></textarea>
+                             <input
+                                    id="address"
+                                    type="text"
+                                    formControlName="address"
+                                    required
+                                    placeholder="Enter Address here..."
+                                    class="input-form"
+                                /> 
+                                <div
+                                    *ngIf="
+                                    (addNewUsersForm.controls['address'].invalid &&
+                                        addNewUsersForm.controls['address'].touched) ||
+                                    addres == true
+                                    "
+                                    class="alert alert-danger"
+                                >
+                                    <div
+                                    *ngIf="addNewUsersForm.controls['address'].errors"
+                                    >
+                                    Address is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p
+                    *ngIf="addNewUsersForm.status == 'INVALID' && all_false"
+                    class="w-100 text-center"
+                    style="color: red"
+                >
+                    <br />**Please fill all the required fields.**
+                </p>
+                    </form>
+                </div>
+              </div> -->
+            <form  [formGroup]="addNewUsersForm" (ngSubmit)="onCreateSubmit()">
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                        <label for="firstname">FirstName</label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-6">
+                        <input
+                            id="firstname"
+                            type="text"
+                            formControlName="firstname"
+                            required
+                            placeholder="Enter FirstName here..."
+                            class="input-form"
+                        />
+                        <div
+                            *ngIf="(addNewUsersForm.controls['firstname'].invalid &&
+                                addNewUsersForm.controls['firstname'].touched) ||
+                                fname == true
+                            "
+                            class="alert alert-danger"
+                        >
+                            <div
+                            *ngIf="addNewUsersForm.controls['firstname'].errors"
+                            >
+                            FirstName is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                        <label for="lastname">LastName</label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-6">
+                        <input
+                            id="lastname"
+                            type="text"
+                            formControlName="lastname"
+                            required
+                            placeholder="Enter LastName here..."
+                            class="input-form"
+                        />
+                        <div
+                            *ngIf="(addNewUsersForm.controls['lastname'].invalid &&
+                                addNewUsersForm.controls['lastname'].touched) ||
+                            lname == true
+                            "
+                            class="alert alert-danger"
+                        >
+                            <div
+                            *ngIf="addNewUsersForm.controls['lastname'].errors"
+                            >
+                            LastName is required.
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="row form-row-css">
+                    <div class="col-sm-3">
+                    <label for="phoneno">Phone Number</label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-6">
+                    <input
+                        id="phoneno"
+                        type="tel"
+                        formControlName="phoneno"
+                        required
+                        placeholder="Enter Phoneno. here..."
+                        class="input-form"
+                    />
+                    <div
+                        *ngIf="
+                        (addNewUsersForm.controls['phoneno'].invalid &&
+                            addNewUsersForm.controls['phoneno'].touched) ||
+                        phno == true
+                        "
+                        class="alert alert-danger"
+                    >
+                        <div
+                        *ngIf="addNewUsersForm.controls['phoneno'].errors"
+                        >
+                        Phone Number is required.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                    <label for="email">Email </label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-8">
+                    <input
+                        id="email"
+                        type="email"
+                        formControlName="email"
+                        required
+                        placeholder="Enter Email here..."
+                        class="input-form"
+                    />
+                    <div
+                        *ngIf="
+                        (addNewUsersForm.controls['email'].invalid &&
+                            addNewUsersForm.controls['email'].touched) ||
+                            email_id == true
+                        "
+                        class="alert alert-danger"
+                    >
+                        <div
+                        *ngIf="addNewUsersForm.controls['email'].errors"
+                        >
+                        Email is required.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                    <label for="password">Password</label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-6">
+                    <input
+                        id="password"
+                        type="password"
+                        formControlName="password"
+                        required
+                        placeholder="Enter Password here..."
+                        class="input-form"
+                    />
+                    <div
+                        *ngIf="
+                        (addNewUsersForm.controls['password'].invalid &&
+                            addNewUsersForm.controls['password'].touched) ||
+                        pwd == true
+                        "
+                        class="alert alert-danger"
+                    >
+                        <div
+                        *ngIf="addNewUsersForm.controls['password'].errors"
+                        >
+                        Password is required.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                      <label for="role">User Type</label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-5">
+                      <select
+                        class="custom-select input-form"
+                        (change)="changeTypeOfTicket($event)"
+                        formControlName="role"
+                      >
+                        <option value="" selected disabled>Choose your User Type</option>
+                        <option *ngFor="let t of UserType" [ngValue]="t">
+                          {{ t }}
+                        </option>
+                      </select>
+                      <div
+                        *ngIf="
+                          (addNewUsersForm.controls['role'].value == '' &&
+                          addNewUsersForm.controls['role'].touched) ||
+                          rle == true
+                        "
+                        class="alert alert-danger"
+                      >
+                        <div
+                          *ngIf="
+                          addNewUsersForm.controls['role'].value == '' || addNewUsersForm.controls['role'].value == null
+                          "
+                        >
+                        User Type is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                    <label for="state">State </label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-8">
+                    <input
+                        id="state"
+                        type="text"
+                        formControlName="state"
+                        required
+                        placeholder="Enter State here..."
+                        class="input-form"
+                    />
+                    <div
+                        *ngIf="
+                        (addNewUsersForm.controls['state'].invalid &&
+                            addNewUsersForm.controls['state'].touched) ||
+                            ste == true
+                        "
+                        class="alert alert-danger"
+                    >
+                        <div
+                        *ngIf="addNewUsersForm.controls['state'].errors"
+                        >
+                        State is required.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                    <label for="city">City </label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-8">
+                    <input
+                        id="city"
+                        type="text"
+                        formControlName="city"
+                        required
+                        placeholder="Enter City here..."
+                        class="input-form"
+                    />
+                    <div
+                        *ngIf="
+                        (addNewUsersForm.controls['city'].invalid &&
+                            addNewUsersForm.controls['city'].touched) ||
+                             cty == true
+                        "
+                        class="alert alert-danger"
+                    >
+                        <div
+                        *ngIf="addNewUsersForm.controls['city'].errors"
+                        >
+                        City is required.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                    <label for="pincode">Pin </label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-8">
+                    <input
+                        id="pincode"
+                        type="text"
+                        formControlName="pincode"
+                        required
+                        placeholder="Enter Pin Code here..."
+                        class="input-form"
+                    />
+                    <div
+                        *ngIf="
+                        (addNewUsersForm.controls['pincode'].invalid &&
+                            addNewUsersForm.controls['pincode'].touched) ||
+                            pin == true
+                        "
+                        class="alert alert-danger"
+                    >
+                        <div
+                        *ngIf="addNewUsersForm.controls['pincode'].errors"
+                        >
+                        Pin Code is required.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                        <label for="address">Address</label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-8">
+                        <textarea
+                      rows="2"
+                      style="height: 90%"
+                      id="address"
+                      type="text"
+                      formControlName="address"
+                      required
+                      placeholder="Enter your current residential address here..."
+                      class="input-form"
+                    ></textarea>
+                        <!-- <input
+                            id="address"
+                            type="text"
+                            formControlName="address"
+                            required
+                            placeholder="Enter Address here..."
+                            class="input-form"
+                        /> -->
+                        <div
+                            *ngIf="
+                            (addNewUsersForm.controls['address'].invalid &&
+                                addNewUsersForm.controls['address'].touched) ||
+                            addres == true
+                            "
+                            class="alert alert-danger"
+                        >
+                            <div
+                            *ngIf="addNewUsersForm.controls['address'].errors"
+                            >
+                            Address is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-row-css">
+                    <div class="col-sm-3">
+                    <label for="branch">Hospital Branch </label>
+                    </div>
+                    <div class="col-sm-1">:</div>
+                    <div class="col-sm-8">
+                    <input
+                        id="branch"
+                        type="text"
+                        formControlName="branch"
+                        required
+                        placeholder="Enter Branch here..."
+                        class="input-form"
+                    />
+                    <div
+                        *ngIf="
+                        (addNewUsersForm.controls['branch'].invalid &&
+                            addNewUsersForm.controls['branch'].touched) ||
+                            brach == true
+                        "
+                        class="alert alert-danger"
+                    >
+                        <div
+                        *ngIf="addNewUsersForm.controls['branch'].errors"
+                        >
+                        Branch is required.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                    <!-- <div class="form-check form-check-inline row">
+                        Permissions : </div> -->
+                    <br>
+                    <p>Permissions :</p> 
+                    <div class="form-check form-check-inline ">
+                    <input
+                      mdbCheckbox
+                      class="form-check-input"
+                      formControlName="callcenter"
+                      type="checkbox"
+                      required
+                      id="cbox_callcenter"
+                      value="option1"
+                    />
+                    <label class="form-check-label" for="cbox_callcenter">Call Center</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      mdbCheckbox
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="appointment"
+                      id="inlineCheckbox2"
+                      value="option2"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox2">Appointments</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      mdbCheckbox
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="iam"
+                      id="inlineCheckbox3"
+                      value="option3"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox3">IAM</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      mdbCheckbox
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="history"
+                      id="inlineCheckbox4"
+                      value="option4"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox4">History</label>
+                  </div>
+                <p
+                    *ngIf="addNewUsersForm.status == 'INVALID' && all_false"
+                    class="w-100 text-center"
+                    style="color: red"
+                >
+                    <br />**Please fill all the required fields.**
+                </p>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="onCreateSubmit()"
+            >
+              Add New User
+            </button>
+          </div>
+        
+    </div>

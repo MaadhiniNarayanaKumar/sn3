@@ -1,0 +1,9 @@
+
+.bg-color {
+    background-image:linear-gradient(to bottom, #1a1a52 , #04060A); 
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}

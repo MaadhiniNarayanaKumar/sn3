@@ -1,0 +1,93 @@
+.all{
+    height:100%;
+    background-color: #eceaea;
+}
+
+.sidebar {
+    width: 400px; /* Set initial width */
+    height: 650px;
+    background-color: #e1e1e1;
+    float: left; /* Initially, sidebar is aligned to the left */
+    font-size: small;
+  }
+
+  .main {
+    margin-left: 400px; /* Set initial margin */
+    height: 535px;
+    /* font-weight: 400;
+    font-size: 40px; */
+    padding: 5%;
+  }
+
+  .chat{
+    width: 90%;
+    height:50px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+    /* margin-bottom: 3%; */
+    margin-top: 3%;
+    border-radius: 10px;
+  }
+  .side-div{
+    /* width: 100%; */
+    height: 95%;
+    margin: 5%;
+    background-color: #eceaea;
+    border-radius: 10px;
+    
+  }
+  .upload-div{
+    padding: 10px;
+    color: transparent;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 15px;
+    border: 1px dashed #999;
+    border-radius: 10px;
+    height:20%;
+  }
+  .upload-side-div::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .upload-side-div::before{
+    content: '📤 Upload your file';
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 400;
+    font-size: 10pt;
+    color:black;
+    margin-left:30%;
+}
+.dataset-load-button{
+    border: 1px solid rgb(195, 193, 193);
+    padding: 10px;
+    width: 45%;
+    border-radius: 12px;
+}
+.send {
+    background: white;
+    width: 100%;
+    border-radius: 13px;
+    box-sizing: border-box;
+    border: 0px solid var(--color-user-message-border);
+    resize: none;
+    font-family: inherit;
+    font-size: 1em;
+    color: black;
+    box-shadow: rgba(0,0,0,0.2) 0 0 45px;
+    outline: none;
+    padding: 1%;
+    margin-left:5%;
+    /* border: 0px grey solid; */
+    width:90%;
+    /* margin-left: 10%; */
+}
